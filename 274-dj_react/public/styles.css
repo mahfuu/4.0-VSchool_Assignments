@@ -1,0 +1,12 @@
+body {
+    background-color: aqua;
+}
+
+.squares {
+    box-sizing: border-box;
+    margin: 20px;
+    padding: 0;
+    height: 200px;
+    width: 200px;
+    border: black solid 1px;
+}

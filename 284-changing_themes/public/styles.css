@@ -1,0 +1,106 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 1fr, auto, 1fr;
+}
+
+header {
+    grid-row: 1 / 2;
+    /* height: 80px; */
+    margin: 0;
+    padding: 0;
+}
+
+header ul {
+    margin: 0;
+    padding: 30px;
+    list-style: none;
+    text-align: center;
+}
+
+li {
+    display: inline;
+    padding: 0 5%;
+    margin: 0;
+}
+
+main {
+    grid-row: 2 / 8;
+    margin: 0;
+    padding: 20px;
+}
+
+main h1 {
+    margin: 0;
+    padding: 75px;
+    height: 200px;
+    width: 300px;
+}
+
+main button {
+    border-radius: 5px;
+    margin: 50px;
+    border: none;
+}
+
+footer {
+    grid-row: 8 / 9;
+    /* height: 60px; */
+    text-align: center;
+}
+
+.dark-header {
+    color: whitesmoke;
+    background-color: blueviolet;
+}
+
+.dark-main {
+    background-color: black;
+}
+
+.dark-main h1 {
+    color: whitesmoke;
+    background-color: blueviolet;
+}
+
+.dark-button {
+    color: whitesmoke;
+    background-color: blueviolet;
+}
+
+.dark-footer {
+    color: whitesmoke;
+    background-color: blueviolet;
+}
+
+.light-header {
+    color: black;
+    background-color: aquamarine;
+}
+
+.light-main {
+    background-color: cornflowerblue;
+}
+
+.light-main h1 {
+    color: black;
+    background-color: aquamarine;
+}
+
+.light-button {
+    color: black;
+    background-color: aquamarine;
+}
+
+.light-footer {
+    color: black;
+    background-color: aquamarine;
+}
