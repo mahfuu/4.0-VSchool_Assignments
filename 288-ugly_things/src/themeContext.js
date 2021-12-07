@@ -1,4 +1,5 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
+import axios from "axios"
 
 const ThemeContext = React.createContext()
 
@@ -16,17 +17,23 @@ function ThemeContextProvider(props) {
     const handleChange = e => {
         const {name, value} = e.target
         setData(prevData => ({...prevData, [name]: value}))
-        console.log(data)
+        console.log("typing")
     }
 
     const handleSubmit = e => {
         e.preventDefault()
-        setList(prevList => [...prevList, data])
         setData({...dataDefault})
+        console.log("submitting")
     }
 
+    useEffect(() => {
+        axios.get("https://api.vschool.io/tmmixon/thing")
+            .then(res => setList([res.data]))
+            .catch(err => console.log("oops..." + err))
+    }, [])
+
     return(
-        <ThemeContext.Provider value={data, handleChange, handleSubmit}>
+        <ThemeContext.Provider value={{data, list, handleChange, handleSubmit}}>
             {props.children}
         </ThemeContext.Provider>
     )

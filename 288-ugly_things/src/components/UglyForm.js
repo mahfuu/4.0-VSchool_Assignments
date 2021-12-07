@@ -2,30 +2,31 @@ import React, {useContext} from "react"
 import {ThemeContext} from "../themeContext"
 
 function UglyForm() {
-    const {data, handleChange, handleSubmit} = useContext(ThemeContext)
-
+    const {handleChange, handleSubmit, data} = useContext(ThemeContext)
+    const {title, imgUrl, description} = data
+    
     return(
         <div className="form-container">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input
                     name="title"
-                    value={data.title}
+                    value={title}
                     placeholder="Title"
                     onChange={handleChange}
                 ></input>
                 <input
                     name="imgUrl"
-                    value={data.imgUrl}
+                    value={imgUrl}
                     placeholder="Img URL"
                     onChange={handleChange}
                 ></input>
                 <input
                     name="description"
-                    value={data.description}
+                    value={description}
                     placeholder="Description"
                     onChange={handleChange}
                 ></input>
-                <button onclick={handleSubmit}>Submit</button>
+                <button type="submit">Submit</button>
             </form>
         </div>
     )
