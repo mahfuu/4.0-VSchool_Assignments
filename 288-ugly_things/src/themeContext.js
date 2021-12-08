@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, {useState} from "react"
 import axios from "axios"
 
 const ThemeContext = React.createContext()
@@ -14,26 +14,82 @@ function ThemeContextProvider(props) {
 
     const [list, setList] = useState([])
 
+    const [editData, setEditData] = useState({...dataDefault})
+
     const handleChange = e => {
         const {name, value} = e.target
         setData(prevData => ({...prevData, [name]: value}))
-        console.log("typing")
     }
 
     const handleSubmit = e => {
         e.preventDefault()
+        axios.post("https://api.vschool.io/tmmixon/thing",{...data})
+            .then(res => {
+                console.log(res.data)
+                getData()
+            })
+            .catch(err => console.log(err))
         setData({...dataDefault})
-        console.log("submitting")
     }
 
-    useEffect(() => {
+    const handleDelete = (e, thingID) => {
+        console.log(e)
+        console.log(thingID)
+        axios.delete(`https://api.vschool.io/tmmixon/thing/${thingID}`)
+            .then(res => {
+                console.log("deleted" + res.data)
+                getData()
+            })
+            .catch(err => "oops, delete is not working..." + err)
+    }
+
+    const handleEdit = (e, thingID) => {
+        console.log(e)
+        console.log(thingID)
+        axios.get(`https://api.vschool.io/tmmixon/thing/${thingID}`)
+            .then(res => setEditData({...res.data}))
+            .catch(err => console.log("edit not working" + err))
+    }
+
+    const editOnChange = e => {
+        const {name, value} = e.target
+        setEditData(prevEditData => ({...prevEditData, [name]: value}))
+    }
+
+    const handleSaveChanges = (e, thingID) => {
+        console.log(e)
+        console.log(thingID)
+        axios.put(`https://api.vschool.io/tmmixon/thing/${thingID}`, editData)
+            .then(res => {
+                getData()
+                console.log(res.data)
+                setEditData({...dataDefault})
+            })
+            .catch(err => "savechange not working" + err)
+    }
+
+    const getData = () => {
         axios.get("https://api.vschool.io/tmmixon/thing")
-            .then(res => setList([res.data]))
+            .then(res => setList(res.data))
             .catch(err => console.log("oops..." + err))
-    }, [])
+        console.log("getting data")
+    }
 
     return(
-        <ThemeContext.Provider value={{data, list, handleChange, handleSubmit}}>
+        <ThemeContext.Provider
+            value={{
+                data,
+                list,
+                editData,
+                getData,
+                handleChange,
+                handleSubmit,
+                handleDelete,
+                handleEdit,
+                editOnChange,
+                handleSaveChanges
+            }}
+        >
             {props.children}
         </ThemeContext.Provider>
     )

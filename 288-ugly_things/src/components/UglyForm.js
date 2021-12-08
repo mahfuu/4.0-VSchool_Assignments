@@ -7,7 +7,7 @@ function UglyForm() {
     
     return(
         <div className="form-container">
-            <form onSubmit={handleSubmit}>
+            <form>
                 <input
                     name="title"
                     value={title}
@@ -26,7 +26,7 @@ function UglyForm() {
                     placeholder="Description"
                     onChange={handleChange}
                 ></input>
-                <button type="submit">Submit</button>
+                <button onClick={handleSubmit}>Submit</button>
             </form>
         </div>
     )
